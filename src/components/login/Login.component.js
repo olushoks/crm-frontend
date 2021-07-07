@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-export const LoginForm = ({ handleChange, email, password, handleSubmit }) => {
+export const LoginForm = ({
+  handleChange,
+  email,
+  password,
+  handleSubmit,
+  formSwitch,
+}) => {
   return (
     <Container>
       <Row>
@@ -36,7 +42,9 @@ export const LoginForm = ({ handleChange, email, password, handleSubmit }) => {
       </Row>
       <Row>
         <Col>
-          <a href="#!">Forgot password</a>
+          <a onClick={() => formSwitch("reset")} href="#!">
+            Forgot password
+          </a>
         </Col>
       </Row>
     </Container>
@@ -46,6 +54,7 @@ export const LoginForm = ({ handleChange, email, password, handleSubmit }) => {
 LoginForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  formSwitch: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
 };

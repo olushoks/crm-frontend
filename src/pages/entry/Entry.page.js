@@ -9,6 +9,10 @@ export const Entry = () => {
   const [password, setPassword] = useState("");
   const [view, setView] = useState("login");
 
+  const formSwitch = (form) => {
+    setView(form);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -34,6 +38,16 @@ export const Entry = () => {
     // TODO call API to submit form
   };
 
+  const handleReset = (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      return alert(`Please enter email`);
+    }
+
+    // TODO call API to reset password
+  };
+
   return (
     <div className="entry-page bg-info">
       <Jumbotron className="form-box">
@@ -43,6 +57,7 @@ export const Entry = () => {
             email={email}
             password={password}
             handleSubmit={handleSubmit}
+            formSwitch={formSwitch}
           />
         )}
         {view === "reset" && (
@@ -50,7 +65,8 @@ export const Entry = () => {
             handleChange={handleChange}
             email={email}
             password={password}
-            handleSubmit={handleSubmit}
+            handleReset={handleReset}
+            formSwitch={formSwitch}
           />
         )}
       </Jumbotron>
