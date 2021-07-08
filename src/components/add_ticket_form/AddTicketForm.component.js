@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 import "./add_ticket_form.style.css";
 
-export const AddTicketForm = ({ formData, handleSubmit, handleChange }) => {
+export const AddTicketForm = ({
+  formData,
+  formError,
+  handleSubmit,
+  handleChange,
+}) => {
   return (
     <Jumbotron className="mt-3 add-new-ticket form-bckgrd bg-light">
       <h1 className="text-info text-center">Add New Ticket</h1>
@@ -19,8 +24,11 @@ export const AddTicketForm = ({ formData, handleSubmit, handleChange }) => {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="enter subject"
+              placeholder="Subject"
             />
+            <Form.Text className="text-danger">
+              {formError.subject && "Subject is required"}
+            </Form.Text>
           </Col>
         </Form.Group>
         <Form.Group as={Row}>
@@ -58,4 +66,5 @@ AddTicketForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   formData: PropTypes.object.isRequired,
+  formError: PropTypes.object.isRequired,
 };
