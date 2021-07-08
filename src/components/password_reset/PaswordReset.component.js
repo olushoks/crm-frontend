@@ -24,7 +24,9 @@ export const PasswordReset = ({
                 placeholder="enter email"
               />
             </Form.Group>
-            <Button type="submit">Reset Password</Button>
+            <Button type="submit" className="form-btn">
+              Reset Password
+            </Button>
           </Form>
           <hr />
         </Col>

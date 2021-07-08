@@ -35,7 +35,9 @@ export const LoginForm = ({
                 placeholder="enter password"
               />
             </Form.Group>
-            <Button type="submit">Login</Button>
+            <Button type="submit" className="form-btn">
+              Login
+            </Button>
           </Form>
           <hr />
         </Col>

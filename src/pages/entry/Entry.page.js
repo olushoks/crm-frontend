@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { LoginForm } from "../../components/login/Login.component";
 import { PasswordReset } from "../../components/password_reset/PaswordReset.component";
+import { Jumbotron } from "react-bootstrap";
 import "./entry.style.css";
 
 export const Entry = () => {
@@ -50,7 +50,7 @@ export const Entry = () => {
 
   return (
     <div className="entry-page bg-info">
-      <Jumbotron className="form-box">
+      <Jumbotron className="form-box form-bckgrd">
         {view === "login" && (
           <LoginForm
             handleChange={handleChange}
