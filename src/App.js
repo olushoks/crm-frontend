@@ -2,7 +2,8 @@ import "./App.css";
 // import { Entry } from "./pages/entry/Entry.page";
 // import { Dashboard } from "./pages/dashboard/Dashboard";
 import { DefaultLayout } from "./layout/DefaultLayout";
-import { TicketLists } from "./pages/ticket_list/TicketLists.page";
+import { Ticket } from "./pages/ticket/Ticket.page";
+// import { TicketLists } from "./pages/ticket_list/TicketLists.page";
 // import { AddTicket } from "./pages/new_ticket/AddTicket.page";
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <DefaultLayout>
         {/* <Dashboard /> */}
         {/* <AddTicket /> */}
-        <TicketLists />
+        {/* <TicketLists /> */}
+        <Ticket />
       </DefaultLayout>
     </div>
   );
