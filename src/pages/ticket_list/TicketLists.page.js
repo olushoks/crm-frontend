@@ -4,6 +4,7 @@ import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { SearchForm } from "../../components/search_form/SearcForm.component";
 import { TicketTable } from "../../components/ticket_table/TicketTable.component";
 import tickets from "../../assets/data/tickets.json";
+import { Link } from "react-router-dom";
 
 export const TicketLists = () => {
   const [search, setSearch] = useState("");
@@ -33,7 +34,9 @@ export const TicketLists = () => {
       </Row>
       <Row className="mt-4">
         <Col>
-          <Button variant="info">Add New Ticket</Button>
+          <Link to="/add-ticket">
+            <Button variant="info">Add New Ticket</Button>
+          </Link>
         </Col>
         <Col className="text-right">
           <SearchForm handleChange={handleChange} search={search} />

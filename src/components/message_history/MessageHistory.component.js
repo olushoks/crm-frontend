@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import "./message_history.style.css";
 
-export const MessageHistory = ({ msg }) => {
-  if (!msg) return null;
+export const MessageHistory = ({ message }) => {
+  if (!message) return null;
 
-  return msg.map((message, index) => (
+  return message.map((message, index) => (
     <div key={index} className="message-history mt-3">
       <div className="send font-weight-bold text-secondary">
         <div className="sender">{message.messageBy}</div>
@@ -16,5 +16,5 @@ export const MessageHistory = ({ msg }) => {
 };
 
 MessageHistory.propTypes = {
-  msg: PropTypes.array.isRequired,
+  message: PropTypes.array.isRequired,
 };
