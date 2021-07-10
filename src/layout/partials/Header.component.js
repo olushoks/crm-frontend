@@ -24,9 +24,6 @@ export const Header = () => {
             <Nav.Link>Tickets</Nav.Link>
           </LinkContainer>
           <Nav.Link onClick={logOut}>Logout</Nav.Link>
-          {/* <Link to="/dashboard">Dashboard</Link>
-          <Link to="/tickets">Tickets</Link>
-          <Link to="">Logout</Link> */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

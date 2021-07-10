@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import { Entry } from "./pages/entry/Entry.page";
 import { Dashboard } from "./pages/dashboard/Dashboard";
-import { DefaultLayout } from "./layout/DefaultLayout";
 import { Ticket } from "./pages/ticket/Ticket.page";
 import { TicketLists } from "./pages/ticket_list/TicketLists.page";
 import { AddTicket } from "./pages/new_ticket/AddTicket.page";
+import { PrivateRoute } from "./components/private_route/PrivateRoute.component";
 
 function App() {
   return (
@@ -15,20 +15,18 @@ function App() {
           <Route exact path="/">
             <Entry />
           </Route>
-          <DefaultLayout>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/add-ticket">
-              <AddTicket />
-            </Route>
-            <Route path="/tickets">
-              <TicketLists />
-            </Route>
-            <Route path="/ticket/:id">
-              <Ticket />
-            </Route>
-          </DefaultLayout>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path="/add-ticket">
+            <AddTicket />
+          </PrivateRoute>
+          <PrivateRoute path="/tickets">
+            <TicketLists />
+          </PrivateRoute>
+          <PrivateRoute path="/ticket/:id">
+            <Ticket />
+          </PrivateRoute>
         </Switch>
       </Router>
     </div>
