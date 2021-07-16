@@ -5,7 +5,6 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { SearchForm } from "../../components/search_form/SearcForm.component";
 import { TicketTable } from "../../components/ticket_table/TicketTable.component";
-import tickets from "../../assets/data/tickets.json";
 import { Link } from "react-router-dom";
 
 export const TicketLists = () => {
