@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchTickets } from "./ticketsAction";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { SearchForm } from "../../components/search_form/SearcForm.component";
@@ -7,10 +9,13 @@ import tickets from "../../assets/data/tickets.json";
 import { Link } from "react-router-dom";
 
 export const TicketLists = () => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [displayTicket, setDisplayTicket] = useState(tickets);
 
-  useEffect(() => {}, [search, displayTicket]);
+  useEffect(() => {
+    dispatch(fetchTickets());
+  }, [search, displayTicket]);
 
   const handleChange = (e) => {
     const { value } = e.target;
