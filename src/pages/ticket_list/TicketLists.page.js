@@ -11,24 +11,10 @@ import { Link } from "react-router-dom";
 export const TicketLists = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-  const [displayTicket, setDisplayTicket] = useState(tickets);
 
   useEffect(() => {
     dispatch(fetchTickets());
-  }, [search, displayTicket]);
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setSearch(value);
-    searchTicket(value);
-  };
-
-  const searchTicket = (search) => {
-    const searchResult = tickets.filter((row) => {
-      return row.subject.toLowerCase().includes(search.toLowerCase());
-    });
-    setDisplayTicket(searchResult);
-  };
+  }, [search, dispatch]);
 
   return (
     <Container>
@@ -44,13 +30,13 @@ export const TicketLists = () => {
           </Link>
         </Col>
         <Col className="text-right">
-          <SearchForm handleChange={handleChange} search={search} />
+          <SearchForm />
         </Col>
       </Row>
       <hr />
       <Row>
         <Col>
-          <TicketTable tickets={displayTicket} />
+          <TicketTable />
         </Col>
       </Row>
     </Container>
