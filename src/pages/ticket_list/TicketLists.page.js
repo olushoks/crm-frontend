@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchTickets } from "./ticketsAction";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -9,11 +9,10 @@ import { Link } from "react-router-dom";
 
 export const TicketLists = () => {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(fetchTickets());
-  }, [search, dispatch]);
+  }, [dispatch]);
 
   return (
     <Container>
