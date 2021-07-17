@@ -2,11 +2,27 @@ import { Navbar, Nav } from "react-bootstrap";
 import logo from "../../assets/img/logo192.png";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import axios from "axios";
+
+const deleteJWT = async () => {
+  const accessJWT = sessionStorage.getItem("accessJWT");
+  try {
+    await axios.delete("http://localhost:5000/v1/user/logout", {
+      headers: {
+        Authorization: accessJWT,
+      },
+    });
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
 
 export const Header = () => {
   const history = useHistory();
 
   const logOut = () => {
+    sessionStorage.removeItem("accessJWT");
+    deleteJWT();
     history.push("/");
   };
   return (
