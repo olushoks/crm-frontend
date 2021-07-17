@@ -12,13 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { loginPending, loginSuccess, loginError } from "./loginSlice";
+import { getUserProfile } from "../../pages/dashboard/userAction";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
 export const LoginForm = ({ formSwitch }) => {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
@@ -68,18 +69,19 @@ export const LoginForm = ({ formSwitch }) => {
       return alert(`Fill out required fields to continue`);
     }
 
-    disptach(loginPending());
+    dispatch(loginPending());
 
     try {
       const isAuth = await login();
       if (isAuth.status === "error") {
-        return disptach(loginError(isAuth.message));
+        return dispatch(loginError(isAuth.message));
       }
 
-      disptach(loginSuccess());
+      dispatch(loginSuccess());
+      dispatch(getUserProfile());
       history.push("/dashboard");
     } catch (error) {
-      disptach(loginError(error.message));
+      dispatch(loginError(error.message));
     }
   };
 
