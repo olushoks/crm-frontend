@@ -41,7 +41,15 @@ export const LoginForm = ({ formSwitch }) => {
           email,
           password,
         });
+        console.log(res);
         resolve(res.data);
+        if (res.data.status === "success") {
+          sessionStorage.setItem("accessJWT", res.data.accessJWT);
+          localStorage.setItem(
+            "crmSite",
+            JSON.stringify({ refreshJWT: res.data.refreshJWT })
+          );
+        }
       } catch (error) {
         reject(error);
       }
