@@ -4,6 +4,10 @@ import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const deleteJWT = async () => {
   const accessJWT = sessionStorage.getItem("accessJWT");
   try {

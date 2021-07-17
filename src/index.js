@@ -6,6 +6,10 @@ import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

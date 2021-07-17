@@ -2,6 +2,10 @@ import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const TicketTable = () => {
   const { filterTicketsRes, isLoading, error } = useSelector(
     (state) => state.tickets

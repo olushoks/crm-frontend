@@ -1,6 +1,10 @@
 import { Header } from "./partials/Header.component";
 import { Footer } from "./partials/Footer.component";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const DefaultLayout = ({ children }) => {
   return (
     <div className="default-layout mb-2">

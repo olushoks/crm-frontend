@@ -1,7 +1,10 @@
 import { Jumbotron, Form, Row, Col, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-
 import "./add_ticket_form.style.css";
+
+/*===================================*
+        END OF IMPORTS
+*===================================*/
 
 export const AddTicketForm = ({
   formData,

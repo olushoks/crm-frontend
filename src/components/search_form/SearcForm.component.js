@@ -2,6 +2,10 @@ import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { filterTicketTable } from "../../pages/ticket_list/ticketsAction";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const SearchForm = () => {
   const dispatch = useDispatch();
 

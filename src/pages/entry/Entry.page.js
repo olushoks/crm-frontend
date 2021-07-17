@@ -4,6 +4,10 @@ import { PasswordReset } from "../../components/password_reset/PaswordReset.comp
 import { Jumbotron } from "react-bootstrap";
 import "./entry.style.css";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const Entry = () => {
   const [view, setView] = useState("login");
 

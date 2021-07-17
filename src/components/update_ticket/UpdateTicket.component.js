@@ -1,6 +1,10 @@
 import { Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const UpdateTicket = ({ message, handleChange, handleSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>

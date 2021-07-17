@@ -7,6 +7,10 @@ import { TicketLists } from "./pages/ticket_list/TicketLists.page";
 import { AddTicket } from "./pages/new_ticket/AddTicket.page";
 import { PrivateRoute } from "./components/private_route/PrivateRoute.component";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 function App() {
   return (
     <div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -24,8 +24,13 @@ export const LoginForm = ({ formSwitch }) => {
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  useEffect(() => {
+    (isAuth || sessionStorage.getItem("accessJWT")) &&
+      history.push("/dashboard");
+  }, [isAuth, history]);
+
+  const [email, setEmail] = useState("olu_shoks@pazcarrus.org");
+  const [password, setPassword] = useState("secret246");
 
   const handleChange = (e) => {
     const { name, value } = e.target;

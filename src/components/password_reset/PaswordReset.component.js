@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const PasswordReset = ({
   handleChange,
   email,
