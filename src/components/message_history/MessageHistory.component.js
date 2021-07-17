@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import "./message_history.style.css";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const MessageHistory = ({ message }) => {
   if (!message) return null;
 

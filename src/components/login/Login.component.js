@@ -9,11 +9,18 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { loginPending, loginSuccess, loginError } from "./loginSlice";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const LoginForm = ({ formSwitch }) => {
   const disptach = useDispatch();
+  const history = useHistory();
+
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
 
   const [email, setEmail] = useState("");
@@ -41,7 +48,6 @@ export const LoginForm = ({ formSwitch }) => {
           email,
           password,
         });
-        console.log(res);
         resolve(res.data);
         if (res.data.status === "success") {
           sessionStorage.setItem("accessJWT", res.data.accessJWT);
@@ -61,16 +67,17 @@ export const LoginForm = ({ formSwitch }) => {
     if (!email || !password) {
       return alert(`Fill out required fields to continue`);
     }
+
     disptach(loginPending());
+
     try {
       const isAuth = await login();
       if (isAuth.status === "error") {
         return disptach(loginError(isAuth.message));
       }
-      if (isAuth.status === "success") {
-        return disptach(loginSuccess());
-      }
-      console.log(isAuth);
+
+      disptach(loginSuccess());
+      history.push("/dashboard");
     } catch (error) {
       disptach(loginError(error.message));
     }
