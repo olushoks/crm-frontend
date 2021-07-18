@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -19,20 +19,9 @@ export const Ticket = () => {
     (state) => state.tickets
   );
 
-  const [message, setMessage] = useState("");
-
   useEffect(() => {
     dispatch(fetchSingleTicket(id));
-  }, [message, id, dispatch]);
-
-  const handleChange = (e) => {
-    setMessage(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Form submitted`);
-  };
+  }, [id, dispatch]);
 
   return (
     <Container>
@@ -50,7 +39,9 @@ export const Ticket = () => {
       <Row>
         <Col className="text-weight-bolder text-secondary">
           <div className="subject">Subject: {selectedTicket.subject}</div>
-          <div className="date">Date Created: {selectedTicket.opened_on}</div>
+          <div className="date">
+            Date Created: {new Date(selectedTicket.opened_on).toLocaleString()}
+          </div>
           <div className="status">Status: {selectedTicket.status}</div>
         </Col>
         <Col className="text-right">
@@ -65,11 +56,7 @@ export const Ticket = () => {
         </Row>
         <Row className="mt-4">
           <Col>
-            <UpdateTicket
-              message={message}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
+            <UpdateTicket />
           </Col>
         </Row>
       </Row>
