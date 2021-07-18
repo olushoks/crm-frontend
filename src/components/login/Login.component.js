@@ -25,9 +25,8 @@ export const LoginForm = ({ formSwitch }) => {
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
 
   useEffect(() => {
-    (isAuth || sessionStorage.getItem("accessJWT")) &&
-      history.push("/dashboard");
-  }, [isAuth, history]);
+    sessionStorage.getItem("accessJWT") && history.push("/dashboard");
+  }, [history]);
 
   const [email, setEmail] = useState("olu_shoks@pazcarrus.org");
   const [password, setPassword] = useState("secret246");
