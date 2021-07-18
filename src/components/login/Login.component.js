@@ -26,7 +26,7 @@ export const LoginForm = ({ formSwitch }) => {
 
   useEffect(() => {
     sessionStorage.getItem("accessJWT") && history.push("/dashboard");
-  }, [history]);
+  }, [history, isAuth]);
 
   const [email, setEmail] = useState("olu_shoks@pazcarrus.org");
   const [password, setPassword] = useState("secret246");
@@ -66,6 +66,7 @@ export const LoginForm = ({ formSwitch }) => {
       }
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

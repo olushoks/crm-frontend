@@ -26,7 +26,7 @@ const refreshAccessJWT = () => {
           },
         }
       );
-      if (res.status === "success") {
+      if (res.data.status === "success") {
         sessionStorage.setItem("accessJWT", res.data.accessJWT);
       }
       resolve(true);

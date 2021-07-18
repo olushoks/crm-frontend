@@ -9,15 +9,15 @@ import axios from "axios";
 *===================================*/
 
 const deleteJWT = async () => {
-  const accessJWT = sessionStorage.getItem("accessJWT");
   try {
+    // const accessJWT = sessionStorage.getItem("accessJWT");
     await axios.delete("http://localhost:5000/v1/user/logout", {
       headers: {
-        Authorization: accessJWT,
+        Authorization: sessionStorage.getItem("accessJWT"),
       },
     });
   } catch (error) {
-    return Promise.reject(error.message);
+    console.log(error.message);
   }
 };
 
@@ -25,8 +25,9 @@ export const Header = () => {
   const history = useHistory();
 
   const logOut = () => {
-    sessionStorage.removeItem("accessJWT");
     deleteJWT();
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("crmSite");
     history.push("/");
   };
   return (
