@@ -11,8 +11,7 @@ export const fetchTickets = () => async (dispatch) => {
   try {
     const result = await axios.get("http://localhost:5000/v1/ticket", {
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sdV9zaG9rc0BwYXpjYXJydXMub3JnIiwiaWF0IjoxNjI2NDIxOTIyLCJleHAiOjE2MjY0MjI4MjJ9.9q2wfOW-gXLTRlCKKhVqEUiGs3O8j1Hjseh8nQtWd1U",
+        Authorization: sessionStorage.getItem("accessJWT"),
       },
     });
     dispatch(fetchTicketSuccess(result.data.result));

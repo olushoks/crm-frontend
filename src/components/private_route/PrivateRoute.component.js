@@ -48,10 +48,13 @@ export const PrivateRoute = ({ children, ...rest }) => {
       const res = await refreshAccessJWT();
       res && dispatch(loginSuccess());
     };
-    updateJWT();
 
-    sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-  }, [dispatch]);
+    !sessionStorage.getItem("accessJWT") &&
+      localStorage.getItem("crmSite") &&
+      updateJWT();
+
+    !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
+  }, [dispatch, isAuth]);
 
   return (
     <Route
