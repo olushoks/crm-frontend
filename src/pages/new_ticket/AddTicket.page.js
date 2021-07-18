@@ -4,6 +4,10 @@ import { AddTicketForm } from "../../components/add_ticket_form/AddTicketForm.co
 import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { validateText } from "../../utilities/form_validation";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const initialState = {
   subject: "",
   issueDate: "",

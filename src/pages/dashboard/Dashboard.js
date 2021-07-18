@@ -4,6 +4,10 @@ import { TicketTable } from "../../components/ticket_table/TicketTable.component
 import tickets from "../../assets/data/tickets.json";
 import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const Dashboard = () => {
   return (
     <Container>

@@ -1,6 +1,10 @@
 import axios from "axios";
 import { getUserPending, getUserSuccess, getUserError } from "./userSlice";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const fetchUser = () => {
   return new Promise(async (resolve, reject) => {
     try {

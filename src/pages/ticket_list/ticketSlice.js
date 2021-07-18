@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const initialState = {
   tickets: [],
   filterTicketsRes: [],
+  selectedTicket: {},
   isLoading: false,
   error: "",
 };
@@ -29,6 +34,17 @@ const ticketListSlice = createSlice({
         return row.subject.toLowerCase().includes(payload.toLowerCase());
       });
     },
+    fetchSingleTicketLoading: (state) => {
+      state.isLoading = true;
+    },
+    fetchSingleTicketSuccess: (state, action) => {
+      state.selectedTicket = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
+    fetchSingleTicketFail: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
@@ -38,5 +54,8 @@ export const {
   fetchTicketSuccess,
   fetchTicketFail,
   filterTickets,
+  fetchSingleTicketLoading,
+  fetchSingleTicketSuccess,
+  fetchSingleTicketFail,
 } = actions;
 export default reducer;
