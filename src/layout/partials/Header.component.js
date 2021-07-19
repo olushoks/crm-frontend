@@ -10,7 +10,6 @@ import axios from "axios";
 
 const deleteJWT = async () => {
   try {
-    // const accessJWT = sessionStorage.getItem("accessJWT");
     await axios.delete("http://localhost:5000/v1/user/logout", {
       headers: {
         Authorization: sessionStorage.getItem("accessJWT"),

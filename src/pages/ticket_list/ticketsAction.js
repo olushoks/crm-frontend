@@ -64,7 +64,7 @@ export const replyTicket = (_id, message) => async (dispatch) => {
         },
       }
     );
-    console.log(result);
+
     if (result.data.status === "error") {
       return dispatch(replyTicketFail(result.data.message));
     }
@@ -73,7 +73,6 @@ export const replyTicket = (_id, message) => async (dispatch) => {
     dispatch(fetchSingleTicket(_id));
   } catch (error) {
     dispatch(replyTicketFail(error.message));
-    console.log(error.message);
   }
 };
 
@@ -91,13 +90,12 @@ export const closeTicket = (_id) => async (dispatch) => {
     );
 
     if (result.data.status === "error") {
-      return console.log(result.data.messagae);
+      dispatch(closeTicketFail(result.data.messagae));
     }
 
     dispatch(closeTicketSuccess(result.data.message));
     dispatch(fetchSingleTicket(_id));
   } catch (error) {
     dispatch(closeTicketFail(error.message));
-    console.log(error);
   }
 };

@@ -1,21 +1,72 @@
-import { Jumbotron, Form, Row, Col, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import {
+  Jumbotron,
+  Form,
+  Row,
+  Col,
+  Button,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { openNewTicket } from "./addTicketAction";
+import { validateText } from "../../utilities/form_validation";
 import "./add_ticket_form.style.css";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
-export const AddTicketForm = ({
-  formData,
-  formError,
-  handleSubmit,
-  handleChange,
-}) => {
+const initialState = {
+  subject: "",
+  opened_on: "",
+  message: "",
+};
+
+const initialFormError = {
+  subject: false,
+  opened_on: false,
+  message: false,
+};
+
+export const AddTicketForm = () => {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState(initialState);
+  const [formError, setFormError] = useState(initialFormError);
+
+  const { isLoading, error, successMsg } = useSelector(
+    (state) => state.createTicket
+  );
+
+  useEffect(() => {}, [formData, formError]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setFormError(initialFormError);
+
+    const isSubjectValid = await validateText(formData.subject);
+
+    setFormError({ ...formError, subject: !isSubjectValid });
+
+    dispatch(openNewTicket(formData));
+    setFormData(initialState);
+  };
+
   return (
     <Jumbotron className="mt-3 add-new-ticket form-bckgrd bg-light">
       <h1 className="text-info text-center">Add New Ticket</h1>
       <hr />
+      <div>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {successMsg && <Alert variant="success">{successMsg}</Alert>}
+        {isLoading && <Spinner variant="primary" animation="border" />}
+      </div>
       <Form autoComplete="off" onSubmit={handleSubmit}>
         <Form.Group as={Row}>
           <Form.Label column sm={3}>
@@ -41,8 +92,8 @@ export const AddTicketForm = ({
           <Col sm={9}>
             <Form.Control
               type="date"
-              name="issueDate"
-              value={formData.issueDate}
+              name="opened_on"
+              value={formData.opened_on}
               onChange={handleChange}
             />
           </Col>
@@ -51,23 +102,16 @@ export const AddTicketForm = ({
           <Form.Label>Detail</Form.Label>
           <Form.Control
             as="textarea"
-            name="detail"
-            value={formData.detail}
+            name="message"
+            value={formData.message}
             rows="5"
             onChange={handleChange}
           />
         </Form.Group>
         <Button type="submit" variant="info" className="form-btn" block>
-          Login
+          Open New Ticket
         </Button>
       </Form>
     </Jumbotron>
   );
-};
-
-AddTicketForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  formData: PropTypes.object.isRequired,
-  formError: PropTypes.object.isRequired,
 };
