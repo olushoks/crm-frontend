@@ -5,13 +5,14 @@ import { useParams } from "react-router-dom";
 import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { MessageHistory } from "../../components/message_history/MessageHistory.component";
 import { UpdateTicket } from "../../components/update_ticket/UpdateTicket.component";
-import { fetchSingleTicket } from "../ticket_list/ticketsAction";
+import { fetchSingleTicket, closeTicket } from "../ticket_list/ticketsAction";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
 export const Ticket = () => {
+  const { replyMsg } = useSelector((state) => state.tickets);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -33,8 +34,9 @@ export const Ticket = () => {
       <Row>
         <Col>
           {isLoading && <Spinner variant="primary" animation="border" />}
+          {error && <Alert variant="danger">{error}</Alert>}
+          {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
         </Col>
-        <Col>{error && <Alert variant="danger">{error}</Alert>}</Col>
       </Row>
       <Row>
         <Col className="text-weight-bolder text-secondary">
@@ -45,7 +47,12 @@ export const Ticket = () => {
           <div className="status">Status: {selectedTicket.status}</div>
         </Col>
         <Col className="text-right">
-          <Button variant="outline-info">Close selected Ticket</Button>
+          <Button
+            variant="outline-info"
+            onClick={() => dispatch(closeTicket(id))}
+          >
+            Close selected Ticket
+          </Button>
         </Col>
         <Row className="mt-4">
           <Col>

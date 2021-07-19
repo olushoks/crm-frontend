@@ -10,6 +10,9 @@ import {
   replyTicketLoading,
   replyTicketSuccess,
   replyTicketFail,
+  closeTicketLoading,
+  closeTicketSuccess,
+  closeTicketFail,
 } from "./ticketSlice";
 
 /*===================================*
@@ -51,7 +54,6 @@ export const fetchSingleTicket = (_id) => async (dispatch) => {
 
 export const replyTicket = (_id, message) => async (dispatch) => {
   replyTicketLoading();
-
   try {
     const result = await axios.put(
       `http://localhost:5000/v1/ticket/${_id}`,
@@ -72,5 +74,30 @@ export const replyTicket = (_id, message) => async (dispatch) => {
   } catch (error) {
     dispatch(replyTicketFail(error.message));
     console.log(error.message);
+  }
+};
+
+export const closeTicket = (_id) => async (dispatch) => {
+  dispatch(closeTicketLoading());
+  try {
+    const result = await axios.patch(
+      `http://localhost:5000/v1/ticket/close-ticket/${_id}`,
+      {},
+      {
+        headers: {
+          Authorization: sessionStorage.getItem("accessJWT"),
+        },
+      }
+    );
+
+    if (result.data.status === "error") {
+      return console.log(result.data.messagae);
+    }
+
+    dispatch(closeTicketSuccess(result.data.message));
+    dispatch(fetchSingleTicket(_id));
+  } catch (error) {
+    dispatch(closeTicketFail(error.message));
+    console.log(error);
   }
 };

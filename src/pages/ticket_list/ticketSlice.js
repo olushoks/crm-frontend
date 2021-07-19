@@ -59,6 +59,18 @@ const ticketListSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
+    closeTicketLoading: (state) => {
+      state.isLoading = true;
+    },
+    closeTicketSuccess: (state, action) => {
+      state.isLoading = false;
+      state.error = "";
+      state.replyMsg = action.payload;
+    },
+    closeTicketFail: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
   },
 });
 
@@ -74,5 +86,8 @@ export const {
   replyTicketLoading,
   replyTicketSuccess,
   replyTicketFail,
+  closeTicketLoading,
+  closeTicketSuccess,
+  closeTicketFail,
 } = actions;
 export default reducer;

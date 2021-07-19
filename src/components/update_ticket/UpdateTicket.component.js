@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert } from "react-bootstrap";
 import { replyTicket } from "../../pages/ticket_list/ticketsAction";
 import { Form, Button } from "react-bootstrap";
 
@@ -11,7 +10,6 @@ import { Form, Button } from "react-bootstrap";
 export const UpdateTicket = () => {
   const dispatch = useDispatch();
   const { _id } = useSelector((state) => state.tickets.selectedTicket);
-  const { replyMsg } = useSelector((state) => state.tickets);
   const [msg, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -28,7 +26,6 @@ export const UpdateTicket = () => {
   };
   return (
     <Form onSubmit={handleSubmit}>
-      <div>{replyMsg && <Alert variant="success">{replyMsg}</Alert>}</div>
       <Form.Text>Reply message or update ticket</Form.Text>
       <Form.Control
         as="textarea"
