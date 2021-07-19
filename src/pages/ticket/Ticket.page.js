@@ -49,6 +49,7 @@ export const Ticket = () => {
         <Col className="text-right">
           <Button
             variant="outline-info"
+            disabled={selectedTicket.status === "closed"}
             onClick={() => dispatch(closeTicket(id))}
           >
             Close selected Ticket
