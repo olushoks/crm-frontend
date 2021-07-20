@@ -6,6 +6,7 @@ import { BreadCrumb } from "../../components/breadcrumb/BreadCrumb.component";
 import { MessageHistory } from "../../components/message_history/MessageHistory.component";
 import { UpdateTicket } from "../../components/update_ticket/UpdateTicket.component";
 import { fetchSingleTicket, closeTicket } from "../ticket_list/ticketsAction";
+import { resetAlert } from "../ticket_list/ticketSlice";
 
 /*===================================*
         END OF IMPORTS
@@ -20,7 +21,10 @@ export const Ticket = () => {
 
   useEffect(() => {
     dispatch(fetchSingleTicket(id));
-  }, [id, dispatch]);
+    return () => {
+      (error || replyMsg) && dispatch(resetAlert());
+    };
+  }, [id, dispatch, error, replyMsg]);
 
   return (
     <Container>

@@ -27,11 +27,20 @@ const createTicketSlice = createSlice({
       state.isLoading = false;
       state.successMsg = action.payload;
     },
+    resetAlert: (state) => {
+      state.error = "";
+      state.isLoading = false;
+      state.successMsg = "";
+    },
   },
 });
 
 const { reducer, actions } = createTicketSlice;
 
-export const { createTicketPending, createTicketError, createTicketSuccess } =
-  actions;
+export const {
+  createTicketPending,
+  createTicketError,
+  createTicketSuccess,
+  resetAlert,
+} = actions;
 export default reducer;

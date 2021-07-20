@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { openNewTicket } from "./addTicketAction";
+import { resetAlert } from "./addTicketSlice";
 import { validateText } from "../../utilities/form_validation";
 import "./add_ticket_form.style.css";
 
@@ -38,7 +39,11 @@ export const AddTicketForm = () => {
     (state) => state.createTicket
   );
 
-  useEffect(() => {}, [formData, formError]);
+  useEffect(() => {
+    return () => {
+      (error || successMsg) && dispatch(resetAlert());
+    };
+  }, [dispatch, formData, formError, error, successMsg]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
