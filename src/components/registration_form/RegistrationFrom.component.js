@@ -8,7 +8,7 @@ const initialState = {
   address: "",
   compnay: "",
   password: "",
-  confirmPassword: "",
+  confirmPwd: "",
 };
 
 const pwdVerification = {
@@ -17,7 +17,9 @@ const pwdVerification = {
   containsLowCase: false,
   containsNum: false,
   containsSpecialxter: false,
+  pwdMatch: false,
 };
+
 const RegistrationForm = () => {
   const [newUser, setNewUser] = useState(initialState);
   const [pwdError, setPwdError] = useState(pwdVerification);
@@ -30,7 +32,7 @@ const RegistrationForm = () => {
     setNewUser({ ...newUser, [name]: value });
 
     if (name === "password") {
-      const hasMin8xters = value.length > 8;
+      const hasMin8xters = value.length >= 8;
       const containsUpCase = /[A-Z]/.test(value);
       const containsLowCase = /[a-z]/.test(value);
       const containsNum = /[0-9]/.test(value);
@@ -45,10 +47,12 @@ const RegistrationForm = () => {
         containsSpecialxter,
       });
     }
-  };
 
-  console.log({ newUser });
-  console.table(newUser);
+    if (name === "confirmPwd") {
+      const pwdMatch = newUser.password === value;
+      setPwdError({ ...pwdError, pwdMatch });
+    }
+  };
 
   return (
     <Container>
@@ -125,8 +129,8 @@ const RegistrationForm = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
-                name="confirmPassword"
-                value={newUser.confirmPassword}
+                name="confirmPwd"
+                value={newUser.confirmPwd}
                 onChange={handleChange}
                 placeholder="Confirm Password"
               />
@@ -169,7 +173,11 @@ const RegistrationForm = () => {
               </li>
             </ul>
 
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={Object.values(pwdError).includes(false)}
+            >
               Submit
             </Button>
           </Form>
