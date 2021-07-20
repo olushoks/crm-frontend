@@ -6,7 +6,7 @@ const initialState = {
   phone: "",
   email: "",
   address: "",
-  compnay: "",
+  company: "",
   password: "",
   confirmPwd: "",
 };
@@ -54,6 +54,11 @@ const RegistrationForm = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newUser);
+  };
+
   return (
     <Container>
       <Row>
@@ -64,7 +69,7 @@ const RegistrationForm = () => {
       <hr />
       <Row>
         <Col>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Full Name</Form.Label>
               <Form.Control
@@ -135,6 +140,11 @@ const RegistrationForm = () => {
                 placeholder="Confirm Password"
               />
             </Form.Group>
+            <Form.Text>
+              {!pwdError.pwdMatch && newUser.confirmPwd && (
+                <div className="text-danger mb-3">Password do not match</div>
+              )}
+            </Form.Text>
             <ul className="mt-4">
               <li
                 className={
@@ -181,6 +191,11 @@ const RegistrationForm = () => {
               Submit
             </Button>
           </Form>
+        </Col>
+      </Row>
+      <Row className="py-4">
+        <Col>
+          Already have an account? <a href="/">Login now</a>
         </Col>
       </Row>
     </Container>
