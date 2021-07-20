@@ -133,6 +133,13 @@ export const LoginForm = ({ formSwitch }) => {
           </a>
         </Col>
       </Row>
+      <Row className="py-4">
+        <Col>
+          {`New here? `}
+          {/* <a onClick={() => formSwitch("reset")} href="#!"> */}
+          <a href="/register">Register Now</a>
+        </Col>
+      </Row>
     </Container>
   );
 };

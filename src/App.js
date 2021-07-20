@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import { Entry } from "./pages/entry/Entry.page";
+import { Registration } from "./pages/registration/Registration.page";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import { Ticket } from "./pages/ticket/Ticket.page";
 import { TicketLists } from "./pages/ticket_list/TicketLists.page";
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Entry />
+          </Route>
+          <Route exact path="/register">
+            <Registration />
           </Route>
           <PrivateRoute path="/dashboard">
             <Dashboard />
