@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { userRegistration } from "./registrationAction";
 
 const initialState = {
-  name: "",
-  phone: "",
-  email: "",
-  address: "",
-  company: "",
-  password: "",
-  confirmPwd: "",
+  name: "Jake Jacki",
+  phone: "8889996666",
+  email: "jake@jackie.org",
+  address: "123 ABC St, Dallas TX",
+  company: "Jackings LLC",
+  password: "Aa@123456",
+  confirmPwd: "Aa@123456",
 };
 
 const pwdVerification = {
@@ -21,6 +23,7 @@ const pwdVerification = {
 };
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
   const [newUser, setNewUser] = useState(initialState);
   const [pwdError, setPwdError] = useState(pwdVerification);
 
@@ -56,7 +59,7 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newUser);
+    dispatch(userRegistration(newUser));
   };
 
   return (
