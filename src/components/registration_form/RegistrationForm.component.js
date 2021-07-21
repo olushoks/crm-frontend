@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Row,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegistration } from "./registrationAction";
 
 const initialState = {
@@ -23,9 +31,13 @@ const pwdVerification = {
 };
 
 const RegistrationForm = () => {
-  const dispatch = useDispatch();
   const [newUser, setNewUser] = useState(initialState);
   const [pwdError, setPwdError] = useState(pwdVerification);
+
+  const dispatch = useDispatch();
+  const { isLoading, status, message } = useSelector(
+    (state) => state.registration
+  );
 
   useEffect(() => {}, [newUser]);
 
@@ -70,6 +82,15 @@ const RegistrationForm = () => {
         </Col>
       </Row>
       <hr />
+      <Row>
+        <Col>
+          {message && (
+            <Alert variant={status === "success" ? "success" : "danger"}>
+              {message}
+            </Alert>
+          )}
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Form onSubmit={handleSubmit}>
@@ -193,6 +214,7 @@ const RegistrationForm = () => {
             >
               Submit
             </Button>
+            {isLoading && <Spinner variant="info" animation="border" />}
           </Form>
         </Col>
       </Row>

@@ -1,5 +1,5 @@
 import { Jumbotron } from "react-bootstrap";
-import RegistrationForm from "../../components/registration_form/RegistrationFrom.component";
+import RegistrationForm from "../../components/registration_form/RegistrationForm.component";
 import "./registration.style.css";
 
 export const Registration = () => {
