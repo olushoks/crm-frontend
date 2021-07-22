@@ -14,7 +14,6 @@ export const userRegistration = (formData) => async (dispatch) => {
       return dispatch(registrationFailed(result.data.message));
     }
 
-    console.log(result.data);
     dispatch(registrationSuccess(result.data.message));
   } catch (error) {
     dispatch(registrationFailed(error.message));
