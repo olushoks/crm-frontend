@@ -32,6 +32,7 @@ const pwdVerification = {
 
 const RegistrationForm = () => {
   const [newUser, setNewUser] = useState(initialState);
+
   const [pwdError, setPwdError] = useState(pwdVerification);
 
   const dispatch = useDispatch();
@@ -71,7 +72,10 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRegistration(newUser));
+    const { name, phone, email, address, company, password } = newUser;
+    dispatch(
+      userRegistration({ name, phone, email, address, company, password })
+    );
   };
 
   return (
