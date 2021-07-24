@@ -1,23 +1,20 @@
-import { useState } from "react";
-import { PasswordReset } from "../../components/password_reset/PaswordReset.component";
+import { useSelector } from "react-redux";
 import { Jumbotron } from "react-bootstrap";
 import "./password_reset.style.css";
+import { PasswordReset } from "../../components/password_reset/PaswordReset.component";
+import PasswordResetForm from "../../components/password_reset/PasswordResetForm.comp";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
 export const PasswordResetPage = () => {
-  const [view, setView] = useState("login");
-
-  const formSwitch = (form) => {
-    setView(form);
-  };
+  const { showReset } = useSelector((state) => state.passwordReset);
 
   return (
     <div className="entry-page bg-info">
       <Jumbotron className="form-box form-bckgrd">
-        <PasswordReset />
+        {showReset ? <PasswordReset /> : <PasswordResetForm />}
       </Jumbotron>
     </div>
   );

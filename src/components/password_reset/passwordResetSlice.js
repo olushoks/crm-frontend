@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const initialState = {
   isLoading: false,
   status: "",
   message: "",
+  showReset: true,
+  email: "",
 };
 
 const passwordResetSlice = createSlice({
@@ -18,7 +24,14 @@ const passwordResetSlice = createSlice({
       state.status = "error";
       state.message = payload;
     },
-    passwordResetFail: (state, { payload }) => {
+    passwordResetSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = "success";
+      state.message = payload.message;
+      state.email = payload.email;
+      state.showReset = false;
+    },
+    updatePasswordSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.status = "success";
       state.message = payload;
@@ -28,6 +41,10 @@ const passwordResetSlice = createSlice({
 
 const { reducer, actions } = passwordResetSlice;
 
-export const { passwordResetPending, passwordResetError, asswordResetFail } =
-  actions;
+export const {
+  passwordResetPending,
+  passwordResetError,
+  passwordResetSuccess,
+  updatePasswordSuccess,
+} = actions;
 export default reducer;

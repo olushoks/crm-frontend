@@ -1,19 +1,41 @@
 import { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { passwordResetError } from "./passwordResetSlice";
+import { resetPassword } from "./passwordResetAction";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
 export const PasswordReset = () => {
+  const dispatch = useDispatch();
+  let { isLoading, status, message } = useSelector(
+    (state) => state.passwordReset
+  );
   const [email, setEmail] = useState("");
-  const handleReset = (e) => {
-    e.preventDefault();
-    console.log(email);
-  };
 
   const handleChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      dispatch(passwordResetError("Email field cannot be empty"));
+      return;
+    }
+    dispatch(resetPassword(email));
+    setEmail("");
   };
 
   return (
@@ -22,6 +44,11 @@ export const PasswordReset = () => {
         <Col>
           <h1 className="text-center">Reset Password</h1>
           <hr />
+          {message && (
+            <Alert variant={status === "success" ? "success" : "danger"}>
+              {message}
+            </Alert>
+          )}
           <Form autoComplete="off" onSubmit={handleReset}>
             <Form.Group>
               <Form.Label>Email Address</Form.Label>
@@ -34,7 +61,8 @@ export const PasswordReset = () => {
               />
             </Form.Group>
             <Button type="submit" className="form-btn">
-              Reset Password
+              Resest Password{" "}
+              {isLoading && <Spinner variant="info" animation="border" />}
             </Button>
           </Form>
           <hr />
