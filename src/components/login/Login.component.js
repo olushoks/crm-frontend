@@ -128,9 +128,7 @@ export const LoginForm = ({ formSwitch }) => {
       </Row>
       <Row>
         <Col>
-          <a onClick={() => formSwitch("reset")} href="#!">
-            Forgot password
-          </a>
+          <a href="/reset-password">Forgot password</a>
         </Col>
       </Row>
       <Row className="py-4">

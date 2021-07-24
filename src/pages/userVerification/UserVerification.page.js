@@ -36,7 +36,7 @@ export const UserVerification = () => {
     };
 
     !response.status && apiCall();
-  }, [response]);
+  }, [response, _id, email]);
 
   return (
     <div className="verification-page bg-info">

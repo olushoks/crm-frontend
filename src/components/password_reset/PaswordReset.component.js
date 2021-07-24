@@ -1,16 +1,21 @@
-import PropTypes from "prop-types";
+import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
-export const PasswordReset = ({
-  handleChange,
-  email,
-  handleReset,
-  formSwitch,
-}) => {
+export const PasswordReset = () => {
+  const [email, setEmail] = useState("");
+  const handleReset = (e) => {
+    e.preventDefault();
+    console.log(email);
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <Container>
       <Row>
@@ -37,18 +42,9 @@ export const PasswordReset = ({
       </Row>
       <Row>
         <Col>
-          <a onClick={() => formSwitch("login")} href="#!">
-            Log in
-          </a>
+          <a href="/">Log in</a>
         </Col>
       </Row>
     </Container>
   );
-};
-
-PasswordReset.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  handleReset: PropTypes.func.isRequired,
-  formSwitch: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
 };

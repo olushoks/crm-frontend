@@ -8,6 +8,7 @@ import { Ticket } from "./pages/ticket/Ticket.page";
 import { TicketLists } from "./pages/ticket_list/TicketLists.page";
 import { AddTicket } from "./pages/new_ticket/AddTicket.page";
 import { PrivateRoute } from "./components/private_route/PrivateRoute.component";
+import { PasswordResetPage } from "./pages/password_reeset/PasswordReset.page";
 
 /*===================================*
         END OF IMPORTS
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Entry />
+          </Route>
+          <Route exact path="/reset-password">
+            <PasswordResetPage />
           </Route>
           <Route exact path="/register">
             <Registration />
