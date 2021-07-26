@@ -11,14 +11,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { userRegistration } from "./registrationAction";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 const initialState = {
-  name: "Jake Jacki",
-  phone: "8889996666",
-  email: "jake@jackie.org",
-  address: "123 ABC St, Dallas TX",
-  company: "Jackings LLC",
-  password: "Aa@123456",
-  confirmPwd: "Aa@123456",
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  company: "",
+  password: "",
+  confirmPwd: "",
 };
 
 const pwdVerification = {
@@ -173,43 +177,47 @@ const RegistrationForm = () => {
                 <div className="text-danger mb-3">Password do not match</div>
               )}
             </Form.Text>
-            <ul className="mt-4">
-              <li
-                className={
-                  pwdError.hasMin8xters ? "text-success" : "text-danger"
-                }
-              >
-                Min 8 characters
-              </li>
-              <li
-                className={
-                  pwdError.containsUpCase ? "text-success" : "text-danger"
-                }
-              >
-                At least one uppercase
-              </li>
-              <li
-                className={
-                  pwdError.containsLowCase ? "text-success" : "text-danger"
-                }
-              >
-                At least one lowercase
-              </li>
-              <li
-                className={
-                  pwdError.containsNum ? "text-success" : "text-danger"
-                }
-              >
-                At least one number
-              </li>
-              <li
-                className={
-                  pwdError.containsSpecialxter ? "text-success" : "text-danger"
-                }
-              >
-                At least one of these specials characters: @ * % $ &
-              </li>
-            </ul>
+            {newUser.password && (
+              <ul className="mt-4">
+                <li
+                  className={
+                    pwdError.hasMin8xters ? "text-success" : "text-danger"
+                  }
+                >
+                  Min 8 characters
+                </li>
+                <li
+                  className={
+                    pwdError.containsUpCase ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one uppercase
+                </li>
+                <li
+                  className={
+                    pwdError.containsLowCase ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one lowercase
+                </li>
+                <li
+                  className={
+                    pwdError.containsNum ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one number
+                </li>
+                <li
+                  className={
+                    pwdError.containsSpecialxter
+                      ? "text-success"
+                      : "text-danger"
+                  }
+                >
+                  At least one of these specials characters: @ * % $ &
+                </li>
+              </ul>
+            )}
 
             <Button
               variant="primary"

@@ -6,6 +6,10 @@ import {
   updatePasswordSuccess,
 } from "./passwordResetSlice";
 
+/*===================================*
+        END OF IMPORTS
+*===================================*/
+
 export const resetPassword = (email) => async (dispatch) => {
   try {
     dispatch(passwordResetPending());
@@ -21,7 +25,6 @@ export const resetPassword = (email) => async (dispatch) => {
     }
 
     dispatch(passwordResetError(result.data.message));
-    console.log(result);
   } catch (error) {
     dispatch(passwordResetError(error.message));
   }
@@ -36,7 +39,6 @@ export const updatePassword = (userObj) => async (dispatch) => {
       userObj
     );
 
-    console.log(result);
     if (result.data.status === "success") {
       return dispatch(updatePasswordSuccess(result.data.message));
     }

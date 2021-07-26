@@ -28,8 +28,8 @@ export const LoginForm = ({ formSwitch }) => {
     sessionStorage.getItem("accessJWT") && history.push("/dashboard");
   }, [history, isAuth]);
 
-  const [email, setEmail] = useState("olu_shoks@pazcarrus.org");
-  const [password, setPassword] = useState("secret246");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;

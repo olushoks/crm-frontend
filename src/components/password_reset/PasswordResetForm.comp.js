@@ -16,8 +16,8 @@ import { updatePassword } from "./passwordResetAction";
 *===================================*/
 
 const initialState = {
-  password: "Aa@123456",
-  confirmPwd: "Aa@123456",
+  password: "",
+  confirmPwd: "",
   otp: "",
 };
 
@@ -137,44 +137,47 @@ const PasswordResetForm = () => {
                 <div className="text-danger mb-3">Password do not match</div>
               )}
             </Form.Text>
-            <ul className="mt-4">
-              <li
-                className={
-                  pwdError.hasMin8xters ? "text-success" : "text-danger"
-                }
-              >
-                Min 8 characters
-              </li>
-              <li
-                className={
-                  pwdError.containsUpCase ? "text-success" : "text-danger"
-                }
-              >
-                At least one uppercase
-              </li>
-              <li
-                className={
-                  pwdError.containsLowCase ? "text-success" : "text-danger"
-                }
-              >
-                At least one lowercase
-              </li>
-              <li
-                className={
-                  pwdError.containsNum ? "text-success" : "text-danger"
-                }
-              >
-                At least one number
-              </li>
-              <li
-                className={
-                  pwdError.containsSpecialxter ? "text-success" : "text-danger"
-                }
-              >
-                At least one of these specials characters: @ * % $ &
-              </li>
-            </ul>
-
+            {user.password && (
+              <ul className="mt-4">
+                <li
+                  className={
+                    pwdError.hasMin8xters ? "text-success" : "text-danger"
+                  }
+                >
+                  Min 8 characters
+                </li>
+                <li
+                  className={
+                    pwdError.containsUpCase ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one uppercase
+                </li>
+                <li
+                  className={
+                    pwdError.containsLowCase ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one lowercase
+                </li>
+                <li
+                  className={
+                    pwdError.containsNum ? "text-success" : "text-danger"
+                  }
+                >
+                  At least one number
+                </li>
+                <li
+                  className={
+                    pwdError.containsSpecialxter
+                      ? "text-success"
+                      : "text-danger"
+                  }
+                >
+                  At least one of these specials characters: @ * % $ &
+                </li>
+              </ul>
+            )}
             <Button
               variant="primary"
               type="submit"
