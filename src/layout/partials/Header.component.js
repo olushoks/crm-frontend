@@ -10,6 +10,7 @@ import {
   fetchSingleTicketSuccess,
   resetAlert,
 } from "../../pages/ticket_list/ticketSlice";
+import { getUserSuccess } from "../../pages/dashboard/userSlice";
 import { logOutUser } from "../../components/login/loginSlice";
 
 /*===================================*
@@ -41,6 +42,7 @@ export const Header = () => {
     dispatch(fetchTicketSuccess([]));
     dispatch(filterTickets([]));
     dispatch(fetchSingleTicketSuccess({}));
+    dispatch(getUserSuccess({}));
     dispatch(resetAlert());
     history.push("/");
   };
