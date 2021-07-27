@@ -82,9 +82,6 @@ export const LoginForm = ({ formSwitch }) => {
 
     if (!email || !password) {
       dispatch(loginError("Cannot submit empty value(s)"));
-      // setTimeout(() => {
-      //   dispatch(loginError(""));
-      // }, 3000);
       return;
     }
 

@@ -3,6 +3,8 @@ import logo from "../../assets/img/logo192.png";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "../../components/login/loginSlice";
 
 /*===================================*
         END OF IMPORTS
@@ -22,13 +24,16 @@ const deleteJWT = async () => {
 
 export const Header = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const logOut = () => {
     deleteJWT();
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("crmSite");
+    dispatch(logOutUser());
     history.push("/");
   };
+
   return (
     <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
       <Navbar.Brand>

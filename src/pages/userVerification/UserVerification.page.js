@@ -25,7 +25,6 @@ const initialState = {
 
 export const UserVerification = () => {
   const { _id, email } = useParams();
-  // const formData = { _id, email };
 
   const [response, setResponse] = useState(initialState);
 
