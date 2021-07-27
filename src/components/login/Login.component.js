@@ -71,7 +71,8 @@ export const LoginForm = ({ formSwitch }) => {
     e.preventDefault();
 
     if (!email || !password) {
-      return alert(`Fill out required fields to continue`);
+      dispatch(loginError("Cannot submit empty value(s)"));
+      return;
     }
 
     dispatch(loginPending());
