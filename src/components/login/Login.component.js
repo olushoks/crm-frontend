@@ -28,6 +28,16 @@ export const LoginForm = ({ formSwitch }) => {
     sessionStorage.getItem("accessJWT") && history.push("/dashboard");
   }, [history, isAuth]);
 
+  useEffect(() => {
+    let errorTimeOut = setTimeout(() => {
+      dispatch(loginError(""));
+    }, 3000);
+
+    return () => {
+      clearTimeout(errorTimeOut);
+    };
+  });
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -72,6 +82,9 @@ export const LoginForm = ({ formSwitch }) => {
 
     if (!email || !password) {
       dispatch(loginError("Cannot submit empty value(s)"));
+      // setTimeout(() => {
+      //   dispatch(loginError(""));
+      // }, 3000);
       return;
     }
 
