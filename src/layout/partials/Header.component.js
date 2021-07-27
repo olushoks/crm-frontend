@@ -4,6 +4,12 @@ import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import {
+  fetchTicketSuccess,
+  filterTickets,
+  fetchSingleTicketSuccess,
+  resetAlert,
+} from "../../pages/ticket_list/ticketSlice";
 import { logOutUser } from "../../components/login/loginSlice";
 
 /*===================================*
@@ -30,7 +36,12 @@ export const Header = () => {
     deleteJWT();
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("crmSite");
+    // RESET STATE TO INITIAL VALUES UPON LOGOUT
     dispatch(logOutUser());
+    dispatch(fetchTicketSuccess([]));
+    dispatch(filterTickets([]));
+    dispatch(fetchSingleTicketSuccess({}));
+    dispatch(resetAlert());
     history.push("/");
   };
 

@@ -24,6 +24,7 @@ const ticketListSlice = createSlice({
     fetchTicketSuccess: (state, action) => {
       state.tickets = action.payload;
       state.filterTicketsRes = action.payload;
+      state.error = "";
       state.isLoading = false;
     },
     fetchTicketFail: (state, action) => {
