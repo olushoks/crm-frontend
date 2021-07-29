@@ -4,14 +4,7 @@ import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import {
-  fetchTicketSuccess,
-  filterTickets,
-  fetchSingleTicketSuccess,
-  resetAlert,
-} from "../../pages/ticket_list/ticketSlice";
-import { getUserSuccess } from "../../pages/dashboard/userSlice";
-import { logOutUser } from "../../components/login/loginSlice";
+import { logOut } from "../../pages/dashboard/userAction";
 
 /*===================================*
         END OF IMPORTS
@@ -33,20 +26,6 @@ export const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const logOut = () => {
-    deleteJWT();
-    sessionStorage.removeItem("accessJWT");
-    localStorage.removeItem("crmSite");
-    // RESET STATE TO INITIAL VALUES UPON LOGOUT
-    dispatch(logOutUser());
-    dispatch(fetchTicketSuccess([]));
-    dispatch(filterTickets([]));
-    dispatch(fetchSingleTicketSuccess({}));
-    dispatch(getUserSuccess({}));
-    dispatch(resetAlert());
-    history.push("/");
-  };
-
   return (
     <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
       <Navbar.Brand>
@@ -61,7 +40,14 @@ export const Header = () => {
           <LinkContainer to="/tickets">
             <Nav.Link>Tickets</Nav.Link>
           </LinkContainer>
-          <Nav.Link onClick={logOut}>Logout</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              dispatch(logOut(deleteJWT));
+              history.push("/");
+            }}
+          >
+            Logout
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

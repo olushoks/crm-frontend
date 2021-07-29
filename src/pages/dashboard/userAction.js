@@ -1,5 +1,12 @@
 import axios from "axios";
 import { getUserPending, getUserSuccess, getUserError } from "./userSlice";
+import {
+  fetchTicketSuccess,
+  filterTickets,
+  fetchSingleTicketSuccess,
+  resetAlert,
+} from "../../pages/ticket_list/ticketSlice";
+import { logOutUser } from "../../components/login/loginSlice";
 
 /*===================================*
         END OF IMPORTS
@@ -40,4 +47,49 @@ export const getUserProfile = () => async (dispatch) => {
   } catch (error) {
     dispatch(getUserError(error.message));
   }
+};
+
+export const refreshAccessJWT = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { refreshJWT } = JSON.parse(localStorage.getItem("crmSite"));
+
+      if (!refreshJWT) {
+        reject(false);
+      }
+
+      const res = await axios.get(
+        "http://localhost:5000/v1/token/new-access-jwt",
+        {
+          headers: {
+            Authorization: refreshJWT,
+          },
+        }
+      );
+
+      if (res.data.status === "success") {
+        sessionStorage.setItem("accessJWT", res.data.accessJWT);
+        resolve(true);
+      }
+    } catch (error) {
+      if (error.message === "Request failed with status code 403") {
+        localStorage.removeItem("crmSite");
+        console.log("refresh REJECT");
+      }
+      reject(false);
+    }
+  });
+};
+
+export const logOut = (deleteJWT) => async (dispatch) => {
+  deleteJWT();
+  sessionStorage.removeItem("accessJWT");
+  localStorage.removeItem("crmSite");
+  // RESET STATE TO INITIAL VALUES UPON LOGOUT
+  dispatch(logOutUser());
+  dispatch(fetchTicketSuccess([]));
+  dispatch(filterTickets([]));
+  dispatch(fetchSingleTicketSuccess({}));
+  dispatch(getUserSuccess({}));
+  dispatch(resetAlert());
 };

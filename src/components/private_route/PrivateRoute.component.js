@@ -1,53 +1,27 @@
-import { Route, Redirect } from "react-router-dom";
-import axios from "axios";
+import { Route, Redirect, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DefaultLayout } from "../../layout/DefaultLayout";
 import { loginSuccess } from "../login/loginSlice";
-import { getUserProfile } from "../../pages/dashboard/userAction";
+import {
+  getUserProfile,
+  refreshAccessJWT,
+} from "../../pages/dashboard/userAction";
 
 /*===================================*
         END OF IMPORTS
 *===================================*/
 
-const refreshAccessJWT = () => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const { refreshJWT } = JSON.parse(localStorage.getItem("crmSite"));
-
-      if (!refreshJWT) {
-        reject("You need to be signed in");
-      }
-
-      const res = await axios.get(
-        "http://localhost:5000/v1/token/new-access-jwt",
-        {
-          headers: {
-            Authorization: refreshJWT,
-          },
-        }
-      );
-      if (res.data.status === "success") {
-        sessionStorage.setItem("accessJWT", res.data.accessJWT);
-      }
-      resolve(true);
-    } catch (error) {
-      if (error.message === "Request failed with status code 403") {
-        localStorage.removeItem("crmSite");
-      }
-      reject(false);
-    }
-  });
-};
-
 export const PrivateRoute = ({ children, ...rest }) => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.login);
   const { user } = useSelector((state) => state.user);
+  const history = useHistory();
 
   useEffect(() => {
     const updateJWT = async () => {
       const res = await refreshAccessJWT();
+
       res && dispatch(loginSuccess());
     };
 
@@ -58,7 +32,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
       updateJWT();
 
     !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-  }, [dispatch, isAuth, user._id]);
+  }, [dispatch, isAuth, user._id, history]);
 
   return (
     <Route

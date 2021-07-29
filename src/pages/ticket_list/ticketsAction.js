@@ -14,6 +14,7 @@ import {
   closeTicketSuccess,
   closeTicketFail,
 } from "./ticketSlice";
+import { logOut, refreshAccessJWT } from "../dashboard/userAction";
 
 /*===================================*
         END OF IMPORTS
@@ -30,6 +31,15 @@ export const fetchTickets = () => async (dispatch) => {
     result.data.result.length &&
       dispatch(fetchTicketSuccess(result.data.result));
   } catch (error) {
+    if (error.message === "Request failed with status code 403") {
+      const res = await refreshAccessJWT();
+      console.log(res);
+      res && dispatch(fetchTickets());
+
+      !res && logOut();
+      return;
+    }
+
     dispatch(fetchTicketFail(error.message));
   }
 };

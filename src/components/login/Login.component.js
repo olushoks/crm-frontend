@@ -36,7 +36,7 @@ export const LoginForm = ({ formSwitch }) => {
     return () => {
       clearTimeout(errorTimeOut);
     };
-  });
+  }, [dispatch, error]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -29,6 +29,7 @@ const loginSlice = createSlice({
     },
     logOutUser: (state) => {
       state.isAuth = false;
+      state.error = "";
     },
   },
 });
