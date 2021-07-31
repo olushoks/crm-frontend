@@ -9,6 +9,7 @@ const initialState = {
   filterTicketsRes: [],
   selectedTicket: {},
   isLoading: false,
+  status: "",
   error: "",
   replyTicketErrRes: "",
   replyMsg: "",
@@ -77,6 +78,7 @@ const ticketListSlice = createSlice({
       state.error = "";
       state.isLoading = false;
       state.replyMsg = "";
+      state.replyTicketErrRes = "";
     },
   },
 });

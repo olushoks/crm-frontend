@@ -45,6 +45,16 @@ export const AddTicketForm = () => {
     };
   }, [dispatch, formData, formError, error, successMsg]);
 
+  useEffect(() => {
+    let errorTimeOut = setTimeout(() => {
+      dispatch(resetAlert());
+    }, 3000);
+
+    return () => {
+      clearTimeout(errorTimeOut);
+    };
+  }, [dispatch, error]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

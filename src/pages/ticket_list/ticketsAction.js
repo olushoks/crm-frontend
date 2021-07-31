@@ -28,6 +28,7 @@ export const fetchTickets = () => async (dispatch) => {
         Authorization: sessionStorage.getItem("accessJWT"),
       },
     });
+
     result.data.result.length &&
       dispatch(fetchTicketSuccess(result.data.result));
   } catch (error) {

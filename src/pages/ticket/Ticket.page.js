@@ -27,6 +27,16 @@ export const Ticket = () => {
     };
   }, [id, dispatch, error, replyMsg]);
 
+  useEffect(() => {
+    let errorTimeOut = setTimeout(() => {
+      dispatch(resetAlert());
+    }, 3000);
+
+    return () => {
+      clearTimeout(errorTimeOut);
+    };
+  }, [dispatch, error, replyMsg, replyTicketErrRes]);
+
   return (
     <Container>
       <Row>
