@@ -113,7 +113,15 @@ export const AddTicketForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button type="submit" variant="info" className="form-btn" block>
+        <Button
+          type="submit"
+          disabled={
+            !formData.subject || !formData.opened_on || !formData.message
+          }
+          variant="info"
+          className="form-btn"
+          block
+        >
           Open New Ticket
         </Button>
       </Form>

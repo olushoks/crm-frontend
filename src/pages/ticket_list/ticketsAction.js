@@ -33,7 +33,7 @@ export const fetchTickets = () => async (dispatch) => {
   } catch (error) {
     if (error.message === "Request failed with status code 403") {
       const res = await refreshAccessJWT();
-      console.log(res);
+
       res && dispatch(fetchTickets());
 
       !res && logOut();
@@ -57,8 +57,18 @@ export const fetchSingleTicket = (_id) => async (dispatch) => {
         Authorization: sessionStorage.getItem("accessJWT"),
       },
     });
+
     dispatch(fetchSingleTicketSuccess(result.data.result));
   } catch (error) {
+    if (error.message === "Request failed with status code 403") {
+      const res = await refreshAccessJWT();
+
+      res && dispatch(fetchSingleTicket(_id));
+
+      !res && logOut();
+      return;
+    }
+
     dispatch(fetchSingleTicketFail(error.message));
   }
 };
@@ -83,6 +93,14 @@ export const replyTicket = (_id, message) => async (dispatch) => {
     dispatch(replyTicketSuccess(result.data.message));
     dispatch(fetchSingleTicket(_id));
   } catch (error) {
+    if (error.message === "Request failed with status code 403") {
+      const res = await refreshAccessJWT();
+
+      res && dispatch(replyTicket(_id, message));
+
+      !res && logOut();
+      return;
+    }
     dispatch(replyTicketFail(error.message));
   }
 };
@@ -108,6 +126,15 @@ export const closeTicket = (_id) => async (dispatch) => {
     dispatch(fetchSingleTicket(_id));
     dispatch(fetchTickets());
   } catch (error) {
+    if (error.message === "Request failed with status code 403") {
+      const res = await refreshAccessJWT();
+
+      res && dispatch(closeTicket(_id));
+
+      !res && logOut();
+      return;
+    }
+
     dispatch(closeTicketFail(error.message));
   }
 };

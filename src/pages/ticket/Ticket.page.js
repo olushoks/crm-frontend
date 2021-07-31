@@ -21,6 +21,7 @@ export const Ticket = () => {
 
   useEffect(() => {
     dispatch(fetchSingleTicket(id));
+
     return () => {
       (error || replyMsg) && dispatch(resetAlert());
     };

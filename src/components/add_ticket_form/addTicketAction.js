@@ -5,6 +5,7 @@ import {
   createTicketSuccess,
 } from "./addTicketSlice";
 import { fetchTickets } from "../../pages/ticket_list/ticketsAction";
+import { logOut, refreshAccessJWT } from "../../pages/dashboard/userAction";
 
 /*===================================*
         END OF IMPORTS
@@ -29,6 +30,14 @@ export const openNewTicket = (formData) => async (dispatch) => {
     dispatch(createTicketSuccess(result.data.message));
     dispatch(fetchTickets());
   } catch (error) {
+    if (error.message === "Request failed with status code 403") {
+      const res = await refreshAccessJWT();
+
+      res && dispatch(openNewTicket(formData));
+
+      !res && logOut();
+      return;
+    }
     dispatch(createTicketError(error.message));
   }
 };
